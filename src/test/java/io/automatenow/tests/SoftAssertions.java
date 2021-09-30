@@ -9,7 +9,7 @@ import org.testng.annotations.*;
 public class SoftAssertions extends BaseTest {
     public static CustomSoftAssert softAssert = new CustomSoftAssert();
 
-    @Test
+    @Test(description = "Takes a screenshot for every soft assertion failure")
     public void testSoftAssert() {
         String pageTitle = homePage.getPageTitle();
         softAssert.assertEquals(pageTitle, "Homes - automateNow", "The title is invalid");
