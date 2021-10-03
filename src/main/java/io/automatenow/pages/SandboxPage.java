@@ -21,6 +21,7 @@ public class SandboxPage extends BasePage {
     private By fileUpload = By.xpath("//a[contains(text(),'File Upload')]");
     private By fileDownload = By.xpath("//a[contains(text(),'File Download')]");
     private By iframes = By.xpath("//a[contains(text(),'IFrames')]");
+    private By slider = By.xpath("//a[contains(text(),'Slider')]");
 
     public String getPageTitle() {
         return driver.getTitle();
@@ -111,5 +112,9 @@ public class SandboxPage extends BasePage {
     public IframesPage clickIframes() {
         click(iframes);
         return new IframesPage();
+    }
+
+    public void clickSlider() {
+        click(slider);
     }
 }

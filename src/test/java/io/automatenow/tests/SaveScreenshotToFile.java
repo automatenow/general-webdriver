@@ -6,6 +6,9 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
+/**
+ * @author Marco A. Cruz
+ */
 @Listeners(TestListener.class)
 public class SaveScreenshotToFile extends BaseTest {
 
