@@ -9,6 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
@@ -20,6 +22,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.NoSuchElementException;
 
 /**
  * @author Marco A. Cruz
@@ -186,8 +189,16 @@ public class BasePage {
     }
 
     public void waitForElementText(By locator, String text) {
+        // This is an explicit wait
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         wait.until(ExpectedConditions.textToBe(locator, text));
+
+        // This is a FluentWait. It does the same as the above wait, but it is more customizable
+//        Wait<WebDriver> wait = new FluentWait<>(driver)
+//                .withTimeout(Duration.ofSeconds(3))
+//                .pollingEvery(Duration.ofMillis(250))
+//                .ignoring(NoSuchElementException.class);
+//        wait.until(ExpectedConditions.textToBe(locator, text));
     }
 
     public void hoverOverElement(By locator) {
