@@ -1,5 +1,10 @@
 package io.automatenow.utils;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.ViewName;
 import io.automatenow.pages.BasePage;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -27,6 +32,10 @@ import java.nio.file.Paths;
  * @author Marco A. Cruz
  */
 public class TestListener extends BasePage implements ITestListener {
+    private String screenshotsDir = "./screenshots/";
+    private ExtentReports extent = new ExtentReports();
+    private ExtentSparkReporter reporter = new ExtentSparkReporter("ExtentReport.html");
+
     @Override
     public void onTestStart(ITestResult iTestResult) {
 
@@ -38,40 +47,56 @@ public class TestListener extends BasePage implements ITestListener {
     }
 
     /**
-     * Use this method to save failed test screenshots as a PNG file.
+     * This method contains three different options for saving screenshots of failed tests. Please uncomment the code
+     * for the options that you wish to use.
      *
      * @param iTestResult
      */
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        String methodName = iTestResult.getName();
-        TakesScreenshot screenshot = (TakesScreenshot) driver;
-        File file = screenshot.getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(file, new File("./failed_tests/" + methodName + ".png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        log.error("Test '" + methodName + "' has failed and a screenshot was taken.");
-    }
+        String screenshotsDir = "./failed_tests/";
+        String screenshotsPath = screenshotsDir + "screenshots.docx";
+        String failedTest = iTestResult.getName();
 
-    /**
-     * Uncomment this method if you wish to save failed test screenshots in a Word document
-     *
-     * @param iTestResult
-     */
-//    @Override
-//    public void onTestFailure(ITestResult iTestResult) {
-//        String failedTest = iTestResult.getName();
-//        String screenshotsPath = "./failed_tests/screenshots.docx";
+        log.error("Test '" + failedTest + "' has failed and a screenshot was taken.");
+
+        /*
+        OPTION 1:
+        Save screenshot as PNG file
+         */
+        takeScreenshot(failedTest);
+
+        /*
+        OPTION 2:
+        Save screenshot as PNG file and add it to an Extent Report
+         */
+//        takeScreenshot(failedTest);
 //
-//        // Take screenshot
+//        // Sets Dashboard as the primary view of the report
+//        reporter.viewConfigurer().viewOrder().as(new ViewName[]{ViewName.DASHBOARD, ViewName.TEST}).apply();
+//        extent.attachReporter(reporter);
+//        extent.createTest(failedTest)
+//                // Allows for setting a test category
+////                .assignCategory("Smoke")
+//                .addScreenCaptureFromPath(screenshotsDir + failedTest + ".png")
+//                // Offers another form of displaying the screenshot
+////                .fail(MediaEntityBuilder.createScreenCaptureFromPath(screenshotsDir + failedTest + ".png").build())
+//                // Prints the error stacktrace
+//                .log(Status.FAIL, iTestResult.getThrowable());
+//        //  Write the test information to the reporter
+//        extent.flush();
+
+        /*
+        OPTION 3:
+        Save screenshot to MS Word document
+         */
+        // Take screenshot
 //        TakesScreenshot screenshot = (TakesScreenshot) driver;
 //        File file = screenshot.getScreenshotAs(OutputType.FILE);
 //
 //        try {
 //            // Set output directory if not already set
-//            Path outputDirectory = Path.of("./failed_tests/");
+//            Path outputDirectory = Path.of(screenshotsDir);
 //            if (!Files.exists(outputDirectory)) {
 //                assertTrue(new File(String.valueOf(outputDirectory)).mkdirs(), "Unable to create output directory");
 //            }
@@ -125,8 +150,7 @@ public class TestListener extends BasePage implements ITestListener {
 //        } catch (IOException | InvalidFormatException e) {
 //            e.printStackTrace();
 //        }
-//        log.error("Test '" + failedTest + "' has failed and a screenshot was taken.");
-//    }
+    }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {

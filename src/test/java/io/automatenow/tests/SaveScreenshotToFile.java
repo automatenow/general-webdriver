@@ -13,10 +13,10 @@ import static org.testng.Assert.*;
 public class SaveScreenshotToFile extends BaseTest {
 
     /*
-    Before running this test make sure that the appropriate onTestFailure() methods is not commented out in the
+    Before running this test make sure that the appropriate onTestFailure() option is not commented out in the
     TestListener class.
      */
-    @Test(description = "Saves a screenshot to a Word document as long as the proper onTestFailure() method is used " +
+    @Test(description = "Saves a screenshot to a Word document as long as the proper onTestFailure() option is used " +
             "in the TestListener class")
     public void testSaveScreenshotToWordDoc() {
         String pageTitle = homePage.getPageTitle();

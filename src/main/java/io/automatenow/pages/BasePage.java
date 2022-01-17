@@ -234,7 +234,7 @@ public class BasePage {
     }
 
     /**
-     * Takes screenshot of whole page
+     * Takes screenshot of whole page and allows you to name the screenshot
      *
      * @param screenshotName The screenshot file name
      */
