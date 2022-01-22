@@ -32,7 +32,6 @@ import java.nio.file.Paths;
  * @author Marco A. Cruz
  */
 public class TestListener extends BasePage implements ITestListener {
-    private String screenshotsDir = "./screenshots/";
     private ExtentReports extent = new ExtentReports();
     private ExtentSparkReporter reporter = new ExtentSparkReporter("ExtentReport.html");
 
@@ -55,7 +54,7 @@ public class TestListener extends BasePage implements ITestListener {
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         String screenshotsDir = "./failed_tests/";
-        String screenshotsPath = screenshotsDir + "screenshots.docx";
+        String screenshotsPathWordDoc = screenshotsDir + "screenshots.docx";
         String failedTest = iTestResult.getName();
 
         log.error("Test '" + failedTest + "' has failed and a screenshot was taken.");
@@ -103,13 +102,13 @@ public class TestListener extends BasePage implements ITestListener {
 //
 //            // Check if screenshots file already exists
 //            XWPFDocument document;
-//            Path screenshotsDocumentPath = Path.of(screenshotsPath);
+//            Path screenshotsDocumentPath = Path.of(screenshotsPathWordDoc);
 //            if (!Files.exists(screenshotsDocumentPath)) {
 //                // Create a blank document
 //                document = new XWPFDocument();
 //            } else {
 //                // Open existing document
-//                document = new XWPFDocument(Files.newInputStream(Paths.get(screenshotsPath)));
+//                document = new XWPFDocument(Files.newInputStream(Paths.get(screenshotsPathWordDoc)));
 //            }
 //
 //            // Add a paragraph to the document
@@ -138,7 +137,7 @@ public class TestListener extends BasePage implements ITestListener {
 //            int imageHeight = 250;
 //
 //            // Set document name and destination
-//            FileOutputStream fos = new FileOutputStream(screenshotsPath);
+//            FileOutputStream fos = new FileOutputStream(screenshotsPathWordDoc);
 //
 //            // Add screenshot to document
 //            run.addPicture(imageData, imageType, imageFileName, Units.toEMU(imageWidth), Units.toEMU(imageHeight));
