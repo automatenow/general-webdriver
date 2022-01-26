@@ -80,7 +80,7 @@ public class TestListener extends BasePage implements ITestListener {
 //                .addScreenCaptureFromPath(screenshotsDir + failedTest + ".png")
 //                // Offers another form of displaying the screenshot
 ////                .fail(MediaEntityBuilder.createScreenCaptureFromPath(screenshotsDir + failedTest + ".png").build())
-//                // Prints the error stacktrace
+//                // Prints the stacktrace
 //                .log(Status.FAIL, iTestResult.getThrowable());
 //        //  Write the test information to the reporter
 //        extent.flush();
