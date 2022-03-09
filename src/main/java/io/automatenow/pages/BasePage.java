@@ -45,8 +45,6 @@ public class BasePage {
 
             browser = properties.getProperty("browser");
             baseUrl = properties.getProperty("baseUrl");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

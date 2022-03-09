@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * @author Marco A. Cruz
@@ -63,27 +64,33 @@ public class TestListener extends BasePage implements ITestListener {
         OPTION 1:
         Save screenshot as PNG file
          */
-        takeScreenshot(failedTest);
+//        takeScreenshot(failedTest);
 
         /*
         OPTION 2:
         Save screenshot as PNG file and add it to an Extent Report
          */
-//        takeScreenshot(failedTest);
-//
-//        // Sets Dashboard as the primary view of the report
-//        reporter.viewConfigurer().viewOrder().as(new ViewName[]{ViewName.DASHBOARD, ViewName.TEST}).apply();
-//        extent.attachReporter(reporter);
-//        extent.createTest(failedTest)
-//                // Allows for setting a test category
-////                .assignCategory("Smoke")
-//                .addScreenCaptureFromPath(screenshotsDir + failedTest + ".png")
-//                // Offers another form of displaying the screenshot
-////                .fail(MediaEntityBuilder.createScreenCaptureFromPath(screenshotsDir + failedTest + ".png").build())
-//                // Prints the stacktrace
-//                .log(Status.FAIL, iTestResult.getThrowable());
-//        //  Write the test information to the reporter
-//        extent.flush();
+        takeScreenshot(failedTest);
+
+        // Sets Dashboard as the primary view of the report
+        reporter.viewConfigurer().viewOrder().as(new ViewName[]{ViewName.DASHBOARD, ViewName.TEST}).apply();
+        extent.attachReporter(reporter);
+        extent.createTest(failedTest)
+                // Add screenshot
+                .addScreenCaptureFromPath(screenshotsDir + failedTest + ".png")
+                // Offers another form of displaying the screenshot
+//                .fail(MediaEntityBuilder.createScreenCaptureFromPath(screenshotsDir + failedTest + ".png").build())
+                // Uses the test's group info to set the test category
+                .assignCategory(iTestResult.getMethod().getGroups())
+                // Prints the stacktrace
+                .log(Status.FAIL, iTestResult.getThrowable())
+                // Prints the test's description
+                .info(iTestResult.getMethod().getDescription())
+                // Prints the test's group
+                .info(Arrays.toString(iTestResult.getMethod().getGroups()));
+        //  Write the test information to the reporter
+        extent.flush();
+
 
         /*
         OPTION 3:

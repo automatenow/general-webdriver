@@ -16,10 +16,9 @@ public class SaveScreenshotToFile extends BaseTest {
     Before running this test make sure that the appropriate onTestFailure() option is not commented out in the
     TestListener class.
      */
-    @Test(description = "Saves a screenshot to a Word document as long as the proper onTestFailure() option is used " +
-            "in the TestListener class")
-    public void testSaveScreenshotToWordDoc() {
+    @Test(groups = {"smoke"}, description = "This test fails, causing the onTestFailure() method in TestListener class to run")
+    public void testOnTestFailureMethod() {
         String pageTitle = homePage.getPageTitle();
-        assertEquals(pageTitle, "Homes - automateNow", "The title is invalid");
+        assertEquals(pageTitle, "aautomateNow | The place to learn software automation.", "The title is invalid");
     }
 }
