@@ -14,7 +14,7 @@ public class TablesPage extends BasePage {
     private By nextBtn = By.xpath("//a[normalize-space()='Next']");
 
     public String getItemPrice(String item) {
-        return driver.findElement(By.xpath("//td[text()='" + item + "']/following-sibling::td")).getText();
+        return getDriver().findElement(By.xpath("//td[text()='" + item + "']/following-sibling::td")).getText();
     }
 
     public void sortByCountry() {
@@ -31,8 +31,8 @@ public class TablesPage extends BasePage {
         boolean foundCountry = false;
 
         while (!foundCountry) {
-            List<WebElement> countryListedOnCurrentPage = driver.findElements(By.xpath("//table[@id='tablepress-1']//td[normalize-space()='"+ country +"']"));
-            List<WebElement> disabledNextBtn = driver.findElements(noNextBtn);
+            List<WebElement> countryListedOnCurrentPage = getDriver().findElements(By.xpath("//table[@id='tablepress-1']//td[normalize-space()='"+ country +"']"));
+            List<WebElement> disabledNextBtn = getDriver().findElements(noNextBtn);
 
             if (countryListedOnCurrentPage.size() > 0) {
                 foundCountry = true;

@@ -5,8 +5,7 @@ import io.automatenow.pages.HomePage;
 import io.automatenow.pages.NavigationBar;
 import io.automatenow.pages.SandboxPage;
 import org.testng.Assert;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 /**
  * @author Marco A. Cruz
@@ -16,16 +15,16 @@ public class BaseTest extends BasePage {
     protected HomePage homePage;
     protected SandboxPage sandboxPage;
 
-    @BeforeSuite
+    @BeforeMethod
     public void setup() {
-        Assert.assertTrue(goToHomepage(), "An error occurred while navigating to the the homepage");
+        Assert.assertTrue(goToHomepage(), "An error occurred while navigating to the homepage");
 
         navBar = new NavigationBar();
         homePage = new HomePage();
         sandboxPage = new SandboxPage();
     }
 
-    @AfterSuite
+    @AfterMethod
     public void tearDown() {
         closeBrowser();
     }

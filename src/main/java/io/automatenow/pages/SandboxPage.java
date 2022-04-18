@@ -24,7 +24,7 @@ public class SandboxPage extends BasePage {
     private By slider = By.xpath("//a[contains(text(),'Slider')]");
 
     public String getPageTitle() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public void clickTwitterButton() {
@@ -44,7 +44,7 @@ public class SandboxPage extends BasePage {
         while (iter.hasNext()) {
             newWindow = iter.next();
             if (!currentWindow.equals(newWindow)) {
-                driver.switchTo().window(newWindow);
+                getDriver().switchTo().window(newWindow);
             }
         }
     }

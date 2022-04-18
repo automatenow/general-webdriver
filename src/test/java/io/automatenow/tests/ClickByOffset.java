@@ -20,10 +20,10 @@ public class ClickByOffset extends BaseTest {
     public void testClickByOffset() {
         sandboxPage.clickSlider();
 
-        WebElement slider = driver.findElement(By.id("slideMe"));
+        WebElement slider = getDriver().findElement(By.id("slideMe"));
         slider.click();
 
-        Actions actions = new Actions(driver);
+        Actions actions = new Actions(getDriver());
 
         // Click right side of slider
 //        actions.moveToElement(slider, 250, 0).click().build().perform();

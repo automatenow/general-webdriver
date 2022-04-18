@@ -14,7 +14,7 @@ public class SearchBoxesPage extends BasePage {
         setText(searchBox, text);
         click(searchBtn);
 
-        if (driver.findElements(noSearchResults).size() > 0) {
+        if (getDriver().findElements(noSearchResults).size() > 0) {
             goBack();
             return false;
         }

@@ -9,10 +9,10 @@ public class HomePage extends BasePage {
     private By welcomeMsg = By.xpath("//span[text()='Welcome to automateNow']");
 
     public String getPageTitle() {
-        return driver.getTitle();
+        return getDriver().getTitle();
     }
 
     public String getWelcomeMessage() {
-        return driver.findElement(welcomeMsg).getText();
+        return getDriver().findElement(welcomeMsg).getText();
     }
 }

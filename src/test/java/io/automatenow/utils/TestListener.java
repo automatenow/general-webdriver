@@ -53,7 +53,7 @@ public class TestListener extends BasePage implements ITestListener {
      * @param iTestResult
      */
     @Override
-    public void onTestFailure(ITestResult iTestResult) {
+    public synchronized void onTestFailure(ITestResult iTestResult) {
         String screenshotsDir = "./failed_tests/";
         String screenshotsPathWordDoc = screenshotsDir + "screenshots.docx";
         String failedTest = iTestResult.getName();
@@ -91,13 +91,12 @@ public class TestListener extends BasePage implements ITestListener {
         //  Write the test information to the reporter
         extent.flush();
 
-
         /*
         OPTION 3:
         Save screenshot to MS Word document
          */
         // Take screenshot
-//        TakesScreenshot screenshot = (TakesScreenshot) driver;
+//        TakesScreenshot screenshot = (TakesScreenshot) getDriver();
 //        File file = screenshot.getScreenshotAs(OutputType.FILE);
 //
 //        try {

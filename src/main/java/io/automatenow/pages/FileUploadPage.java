@@ -11,7 +11,7 @@ public class FileUploadPage extends BasePage {
     private By uploadStatus = By.xpath("//div[@class='wpcf7-response-output']");
     
     public FileUploadPage uploadFile(String filepath) {
-        driver.findElement(chooseFileBtn).sendKeys(filepath);
+        getDriver().findElement(chooseFileBtn).sendKeys(filepath);
         click(uploadBtn);
         waitForElementText(uploadStatus, "Thank you for your message. It has been sent.");
         return this;

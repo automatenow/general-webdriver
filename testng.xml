@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="automateNow suite" parallel="methods">
+    <test name="my parallel tests">
+        <classes>
+            <class name="io.automatenow.tests.SaveScreenshotToFile"/>
+        </classes>
+    </test>
+</suite>

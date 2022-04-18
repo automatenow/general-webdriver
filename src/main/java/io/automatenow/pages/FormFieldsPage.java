@@ -34,7 +34,7 @@ public class FormFieldsPage extends BasePage {
     }
 
     public boolean checkboxIsSelected(String option) {
-        return driver.findElement(By.xpath("//input[@value='Option " + option + "']")).isSelected();
+        return getDriver().findElement(By.xpath("//input[@value='Option " + option + "']")).isSelected();
     }
 
     /**
@@ -43,7 +43,7 @@ public class FormFieldsPage extends BasePage {
      * @param option Displayed text
      */
     public FormFieldsPage selectFromDropdown(String option) {
-        Select dDown = new Select(driver.findElement(dropDown));
+        Select dDown = new Select(getDriver().findElement(dropDown));
         dDown.selectByVisibleText(option);
         return this;
     }
@@ -52,7 +52,7 @@ public class FormFieldsPage extends BasePage {
      * @return The option that is currently selected.
      */
     public String getDropdownText() {
-        Select dDown = new Select(driver.findElement(dropDown));
+        Select dDown = new Select(getDriver().findElement(dropDown));
         return dDown.getFirstSelectedOption().getText();
     }
 
@@ -67,7 +67,7 @@ public class FormFieldsPage extends BasePage {
     }
 
     public boolean radioButtonIsSelected(String option) {
-        return driver.findElement(By.cssSelector("input[value='" + option + "']")).isSelected();
+        return getDriver().findElement(By.cssSelector("input[value='" + option + "']")).isSelected();
     }
 
     public FormFieldsPage setEmail(String email) {

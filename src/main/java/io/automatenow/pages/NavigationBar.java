@@ -15,13 +15,13 @@ public class NavigationBar extends BasePage {
     private By webdriverIntro = By.xpath("//a[text()='Intro to Selenium WebDriver']");
 
     public SandboxPage selectSandbox() {
-        driver.findElement(sandbox).click();
+        getDriver().findElement(sandbox).click();
         return new SandboxPage();
     }
 
     public void selectIntroToSeleniumWebDriver() {
         hoverOverElement(vlog);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOfElementLocated(webdriverIntro)).click();
     }
 }
