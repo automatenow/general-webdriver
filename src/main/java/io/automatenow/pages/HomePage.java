@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
  */
 public class HomePage extends BasePage {
     private By welcomeMsg = By.xpath("//span[text()='Welcome to automateNow']");
+    private By logo = By.xpath("//img[@alt='automateNow Logo | automatenow.io']");
 
     public String getPageTitle() {
         return getDriver().getTitle();
@@ -14,5 +15,9 @@ public class HomePage extends BasePage {
 
     public String getWelcomeMessage() {
         return getDriver().findElement(welcomeMsg).getText();
+    }
+
+    public boolean logoIsDisplayed() {
+        return getDriver().findElement(logo).isDisplayed();
     }
 }

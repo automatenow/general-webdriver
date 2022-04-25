@@ -15,15 +15,26 @@ public class BaseTest extends BasePage {
     protected HomePage homePage;
     protected SandboxPage sandboxPage;
 
+    /**
+     * This method runs before every test (including during parallel execution).
+     * It expects a 'browser' parameter, which is passed through from the testng.xml file. The default browser to be
+     * used is Chrome.
+     *
+     * @param browser The web browser on which tests should be executed.
+     */
     @BeforeMethod
-    public void setup() {
-        Assert.assertTrue(goToHomepage(), "An error occurred while navigating to the homepage");
-
+    @Parameters("browser")
+    public void setup(@Optional("chrome") String browser) {
         navBar = new NavigationBar();
         homePage = new HomePage();
         sandboxPage = new SandboxPage();
+
+        Assert.assertTrue(goToHomepage(browser), "An error occurred while navigating to the homepage");
     }
 
+    /**
+     * This method runs after every test (including during parallel execution).
+     */
     @AfterMethod
     public void tearDown() {
         closeBrowser();

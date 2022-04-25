@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ThreadGuard;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,15 +28,14 @@ public class BasePage {
     protected static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     protected static Logger log = LogManager.getLogger();
 
-    public String browser;
     public String baseUrl;
 
     public Properties properties;
 
-    public Boolean goToHomepage() {
+    public Boolean goToHomepage(String browser) {
         try {
             loadProperties();
-            openBrowser();
+            openBrowser(browser);
             getDriver().get(baseUrl);
         } catch (Exception e) {
             System.out.println("Unable to navigate to the homepage");
@@ -53,39 +53,48 @@ public class BasePage {
         try (FileInputStream file = new FileInputStream("src/main/java/io/automatenow/config/config.properties")) {
             properties = new Properties();
             properties.load(file);
-            browser = properties.getProperty("browser");
             baseUrl = properties.getProperty("baseUrl");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void openBrowser() {
-        if (browser.equals("chrome")) {
-            WebDriverManager.chromedriver().setup();
+    private void openBrowser(String browser) {
 
-            // Run in headless mode
+        switch (browser) {
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                // Run in headless mode
 //                ChromeOptions options = new ChromeOptions();
 //                options.addArguments("--headless");
 //                options.addArguments("--window-size=1920,1080");
 //                driver.set(ThreadGuard.protect(new ChromeDriver(options)));
 
-            // Change download default directory
-//            ChromeOptions options = new ChromeOptions();
-//            Map<String, Object> prefs = new HashMap<>();
-              // Replace '\\' with '/' when setting the path in a Mac
-//            prefs.put("download.default_directory", System.getProperty("user.dir") + "\\");
-//            options.setExperimentalOption("prefs", prefs);
-//            driver.set(ThreadGuard.protect(new ChromeDriver(options)));
+                // Change download default directory
+//                ChromeOptions options = new ChromeOptions();
+//                Map<String, Object> prefs = new HashMap<>();
+                // Replace '\\' with '/' when setting the path in a Mac
+//                prefs.put("download.default_directory", System.getProperty("user.dir") + "\\");
+//                options.setExperimentalOption("prefs", prefs);
+//                driver.set(ThreadGuard.protect(new ChromeDriver(options)));
 
-            // Disable message 'Chrome is being controlled by automated test software'
+                // Disable message 'Chrome is being controlled by automated test software'
 //                ChromeOptions options = new ChromeOptions();
 //                options.setExperimentalOption("excludeSwitches", Arrays.asList("enable-automation"));
 //                driver.set(ThreadGuard.protect(new ChromeDriver(options)));
+                driver.set(ThreadGuard.protect(new ChromeDriver()));
+                break;
 
-            driver.set(ThreadGuard.protect(new ChromeDriver()));
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                driver.set(ThreadGuard.protect(new FirefoxDriver()));
+                break;
+
+            default:
+                log.error("Invalid browser property: " + browser);
         }
 
+        assert getDriver() != null;
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         getDriver().manage().window().maximize();
     }
