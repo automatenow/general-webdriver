@@ -22,7 +22,7 @@ public class BaseTest extends BasePage {
      *
      * @param browser The web browser on which tests should be executed.
      */
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     @Parameters("browser")
     public void setup(@Optional("chrome") String browser) {
         navBar = new NavigationBar();
@@ -35,7 +35,7 @@ public class BaseTest extends BasePage {
     /**
      * This method runs after every test (including during parallel execution).
      */
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         closeBrowser();
     }

@@ -33,7 +33,7 @@ import java.util.Arrays;
  * @author Marco A. Cruz
  */
 public class TestListener extends BasePage implements ITestListener {
-    private ExtentReports extent = new ExtentReports();
+    private static ExtentReports extent = new ExtentReports();
     private ExtentSparkReporter reporter = new ExtentSparkReporter("ExtentReport.html");
 
     @Override

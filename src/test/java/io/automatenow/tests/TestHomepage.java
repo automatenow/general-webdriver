@@ -2,13 +2,25 @@ package io.automatenow.tests;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
 
 public class TestHomepage extends BaseTest {
 
-    @Test
-    public void testLogo() {
+    @Test(groups = "firefox")
+    public void testLogo1() {
         boolean logoIsPresent = homePage.logoIsDisplayed();
-        assertTrue(logoIsPresent, "The automateNow log is not displayed");
+        assertFalse(logoIsPresent, "The automateNow logo is displayed");
+    }
+
+    @Test(groups = "chrome")
+    public void testLogo2() {
+        boolean logoIsPresent = homePage.logoIsDisplayed();
+        assertFalse(logoIsPresent, "The automateNow logo is  displayed");
+    }
+
+    @Test(groups = "chrome")
+    public void testLogo3() {
+        boolean logoIsPresent = homePage.logoIsDisplayed();
+        assertFalse(logoIsPresent, "The automateNow logo is displayed");
     }
 }

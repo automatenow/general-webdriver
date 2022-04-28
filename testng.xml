@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="automateNow" parallel="tests">
+
+    <listeners>
+        <listener class-name="io.automatenow.utils.TestListener"/>
+    </listeners>
+
     <test name="Chrome tests">
         <parameter name="browser" value="chrome"/>
+        <groups>
+            <run>
+                <include name="chrome"/>
+            </run>
+        </groups>
         <classes>
             <class name="io.automatenow.tests.TestHomepage"/>
         </classes>
     </test>
+
     <test name="Firefox tests">
         <parameter name="browser" value="firefox"/>
+        <groups>
+            <run>
+                <include name="firefox"/>
+            </run>
+        </groups>
         <classes>
             <class name="io.automatenow.tests.TestHomepage"/>
         </classes>
     </test>
+
 </suite>
