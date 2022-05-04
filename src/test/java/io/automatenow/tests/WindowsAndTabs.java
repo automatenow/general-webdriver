@@ -3,6 +3,9 @@ package io.automatenow.tests;
 import org.openqa.selenium.WindowType;
 import org.testng.annotations.Test;
 
+/**
+ * @author Marco A. Cruz
+ */
 public class WindowsAndTabs extends BaseTest {
 
     @Test(description = "Opens a new browser window")

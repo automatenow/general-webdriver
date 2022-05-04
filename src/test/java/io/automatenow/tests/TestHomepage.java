@@ -4,6 +4,9 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertFalse;
 
+/**
+ * @author Marco A. Cruz
+ */
 public class TestHomepage extends BaseTest {
 
     @Test(groups = "firefox")

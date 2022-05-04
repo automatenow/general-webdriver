@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
 /**
  * @author Marco A. Cruz
  */
@@ -12,6 +14,22 @@ public class TablesPage extends BasePage {
     private By countrySort = By.cssSelector(".column-2.sorting");
     private By noNextBtn = By.cssSelector(".paginate_button.next.disabled");
     private By nextBtn = By.xpath("//a[normalize-space()='Next']");
+    private By h1 = By.cssSelector("h1[itemprop='headline']");
+
+    public TablesPage() {
+        // This should be one of the few type of assertions that are made in a page object class
+        String h1Heading = getText(h1);
+        assertEquals(h1Heading, "Tables");
+    }
+
+    public void verifyCountryInRow(int row, String expectedCountry) {
+        String actualCountry = getText(By.xpath("//table[@id='tablepress-1']/tbody/tr[" + row + "]/td[2]"));
+        assertEquals(actualCountry, expectedCountry, "Unexpected country found");
+    }
+
+    public String getCountryInRow(int row) {
+        return getText(By.xpath("//table[@id='tablepress-1']/tbody/tr[" + row + "]/td[2]"));
+    }
 
     public String getItemPrice(String item) {
         return getDriver().findElement(By.xpath("//td[text()='" + item + "']/following-sibling::td")).getText();

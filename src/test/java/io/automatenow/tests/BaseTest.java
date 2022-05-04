@@ -1,9 +1,6 @@
 package io.automatenow.tests;
 
-import io.automatenow.pages.BasePage;
-import io.automatenow.pages.HomePage;
-import io.automatenow.pages.NavigationBar;
-import io.automatenow.pages.SandboxPage;
+import io.automatenow.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.*;
 

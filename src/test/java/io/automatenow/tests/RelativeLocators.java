@@ -7,6 +7,9 @@ import org.testng.annotations.Test;
 
 import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
+/**
+ * @author Marco A. Cruz
+ */
 public class RelativeLocators extends BaseTest {
 
     @BeforeTest
