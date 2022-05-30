@@ -1,0 +1,12 @@
+data 1:
+  Input Field: Hello
+  Checkbox: '1'
+  Radio Button: White
+  Dropdown: Binary
+  Email: info@automatenow.io
+  Message: This is a test
+
+data 2:
+  Oranges: $3.99
+  Laptop: $1200.00
+  Marbles: $1.25

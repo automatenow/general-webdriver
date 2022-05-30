@@ -81,6 +81,11 @@ public class FormFieldsPage extends BasePage {
     }
 
     public FormFieldsPage clickSubmit() {
+        try {
+            Thread.sleep(250);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         click(submit);
         return this;
     }

@@ -19,20 +19,20 @@ public class BaseTest extends BasePage {
      *
      * @param browser The web browser on which tests should be executed.
      */
-    @BeforeMethod(alwaysRun = true)
+    @BeforeSuite(alwaysRun = true)
     @Parameters("browser")
     public void setup(@Optional("chrome") String browser) {
+        Assert.assertTrue(goToHomepage(browser), "An error occurred while navigating to the homepage");
+
         navBar = new NavigationBar();
         homePage = new HomePage();
         sandboxPage = new SandboxPage();
-
-        Assert.assertTrue(goToHomepage(browser), "An error occurred while navigating to the homepage");
     }
 
     /**
      * This method runs after every test (including during parallel execution).
      */
-    @AfterMethod(alwaysRun = true)
+    @AfterSuite(alwaysRun = true)
     public void tearDown() {
         closeBrowser();
     }
